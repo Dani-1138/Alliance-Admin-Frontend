@@ -1,0 +1,75 @@
+@font-face {
+    font-family: 'Inter';
+    font-weight: 300;
+    src: local('Inter'),
+      url('assets/fonts/Inter/static/Inter-Light.ttf') format('truetype');
+  }
+  @font-face {
+    font-family: 'Inter';
+    font-weight: 400;
+    src: local('Inter'),
+      url('assets/fonts/Inter/static/Inter-Regular.ttf') format('truetype');
+  }
+  
+  @font-face {
+    font-family: 'Inter';
+    font-weight: 500;
+    src: local('Inter'), url('assets/fonts/Inter/static/Inter-Medium.ttf');
+  }
+  
+  @font-face {
+    font-family: 'Inter';
+    font-weight: 600;
+    src: local('Inter'),
+      url('assets/fonts/Inter/static/Inter-SemiBold.ttf') format('truetype');
+  }
+  
+  @font-face {
+    font-family: 'Inter';
+    font-weight: 700;
+    src: local('Inter'),
+      url('assets/fonts/Inter/static/Inter-Bold.ttf') format('truetype');
+  }
+  
+  @font-face {
+    font-family: 'Poppins';
+    font-weight: 800;
+    src: local('Poppins'),
+      url('assets/fonts/Poppins/Poppins-ExtraBold.ttf') format('truetype');
+  }
+  
+  @font-face {
+    font-family: 'Poppins';
+    font-weight: 700;
+    src: local('Poppins'),
+      url('assets/fonts/Poppins/Poppins-Bold.ttf') format('truetype');
+  }
+  
+  @font-face {
+    font-family: 'Poppins';
+    font-weight: 600;
+    src: local('Poppins'),
+      url('assets/fonts/Poppins/Poppins-SemiBold.ttf') format('truetype');
+  }
+  
+  @font-face {
+    font-family: 'Poppins';
+    font-weight: 500;
+    src: local('Poppins'),
+      url('assets/fonts/Poppins/Poppins-Medium.ttf') format('truetype');
+  }
+  
+  @font-face {
+    font-family: 'Poppins';
+    font-weight: 400;
+    src: local('Poppins'),
+      url('assets/fonts/Poppins/Poppins-Regular.ttf') format('truetype');
+  }
+  
+  @font-face {
+    font-family: 'Poppins';
+    font-weight: 300;
+    src: local('Poppins'),
+      url('assets/fonts/Poppins/Poppins-Light.ttf') format('truetype');
+  }
+  
