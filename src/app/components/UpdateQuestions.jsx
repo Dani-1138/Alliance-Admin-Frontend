@@ -233,7 +233,6 @@ const UpdateQuestionForm = () => {
                       </div>
                     </div>
                   </div>
-
                   <div>
                     <button type="submit" className="btn btn-primary">
                       Update Question

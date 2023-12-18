@@ -183,18 +183,17 @@ const ExamDetailForm = () => {
                 </div>
               )}
             </div>
-
             <div>
-              <button type="submit" className="btn btn-primary">
-                <Link
-                  to={{
-                    pathname: '/admin/exam',
-                    search: `?title=${encodeURIComponent(examData.title)}`,
-                  }}
-                >
+              <Link
+                to={{
+                  pathname: '/admin/exam',
+                  search: `?title=${encodeURIComponent(examData.title)}`,
+                }}
+              >
+                <button type="submit" className="btn btn-primary">
                   Upload Exam & Next
-                </Link>
-              </button>
+                </button>
+              </Link>
             </div>
           </form>
         </div>

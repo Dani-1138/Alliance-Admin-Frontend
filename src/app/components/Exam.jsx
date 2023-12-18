@@ -5,10 +5,12 @@ import { useEffect } from 'react';
 import { setExamStart } from '../pages/AdminExamPage/slice';
 import BasicSelect from '../ui/Select';
 import { getExamDetailStart } from '../pages/AdminExamDetailPage/slice';
+import ResponseModal from '../ui/ResponseModal';
 // import { setAnswerStart } from '../pages/AdminExamPage/answerSlice';
 // import axios from 'axios';
 
 const ExamForm = () => {
+  const examStatus = useSelector(state => state.exam.status);
   const exams = [1, 2, 2, 3];
   const [questionData, setQuestionData] = useState({
     question: '',
@@ -66,7 +68,8 @@ const ExamForm = () => {
       video_url: questionData.videoUrl,
       answer,
     };
-    dispatch(setExamStart(question));
+    const res = dispatch(setExamStart(question));
+    console.log(res);
     // dispatch(setAnswerStart(answer));
     // console.log(data);
   };
@@ -230,6 +233,7 @@ const ExamForm = () => {
             </div>
           </div>
         </div>
+        {examStatus && <ResponseModal type="exam" />}
       </div>
       {/* </div>
       </WrapperContainer> */}

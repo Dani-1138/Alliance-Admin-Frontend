@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   exams: [],
+  examStatus: '',
   loading: false,
   error: null,
 };
@@ -11,11 +12,14 @@ const examSlice = createSlice({
   initialState,
   reducers: {
     setExamStart: (state, action) => {
-      state.courses = action.payload;
+      console.log('start');
+      state.exams = action.payload;
     },
     setExamSuccess: (state, action) => {
+      console.log('sucesss');
       state.loading = false;
-      state.exams = action.payload[0].data;
+      state.exams = action.payload;
+      state.examStatus = action.payload.data.msg;
     },
     setExamFailure: (state, action) => {
       state.loading = false;
@@ -59,6 +63,9 @@ const examSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    setExamStatus: (state, action) => {
+      state.status = action.payload;
+    },
   },
 });
 
@@ -75,6 +82,7 @@ export const {
   updateExamStart,
   updateExamSuccess,
   updateExamFailure,
+  setExamStatus,
 } = examSlice.actions;
 
 export default examSlice.reducer;

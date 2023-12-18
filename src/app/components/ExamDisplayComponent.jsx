@@ -15,6 +15,7 @@ const Quiz = () => {
   const dispatch = useDispatch();
   const queryParams = new URLSearchParams(location.search);
   const [alert, setAlert] = useState(false);
+
   const correct_answer = queryParams.get('correct_answer');
   const explanation = queryParams.get('explanation');
   const id = queryParams.get('id');
@@ -26,7 +27,6 @@ const Quiz = () => {
   useEffect(() => {
     console.log(examId, id);
     dispatch(getAnswerStart({ examId, id }));
-    console.log(answers);
     console.log(answers);
     console.log(answers);
   }, [examId, id]);
@@ -97,7 +97,30 @@ const Quiz = () => {
                 <button style={{ marginLeft: '20px' }} onClick={handleSubmit}>
                   Ckeck
                 </button>
-                <Link to={`/admin/update-course/${id}`}>
+                <Link
+                  to={{
+                    pathname: '/admin/update-question',
+                    search: `?correct_answer=${encodeURIComponent(
+                      correct_answer,
+                    )}&explanation=${encodeURIComponent(
+                      explanation,
+                    )}&id=${encodeURIComponent(
+                      id,
+                    )}&question=${encodeURIComponent(
+                      question,
+                    )}&examId=${encodeURIComponent(
+                      examId,
+                    )}&video=${encodeURIComponent(
+                      video,
+                    )}&A=${encodeURIComponent(
+                      answers && answers[0]?.Answer,
+                    )}&B=${encodeURIComponent(
+                      answers && answers[1]?.Answer,
+                    )}&C=${encodeURIComponent(
+                      answers && answers[2]?.Answer,
+                    )}&D=${encodeURIComponent(answers && answers[3]?.Answer)}`,
+                  }}
+                >
                   <button style={{ marginLeft: '20px' }}>Edit</button>
                 </Link>
               </div>

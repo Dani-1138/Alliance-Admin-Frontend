@@ -6,6 +6,7 @@ import { setStatus } from '../pages/AdminCoursePage/slice';
 import { setNewsStatus } from '../pages/AdminNewsPage/slice';
 import { useNavigate } from 'react-router-dom';
 import { setNotificationStatus } from '../pages/AdminNotificationPage/slice';
+import { setExamStatus } from '../pages/AdminExamPage/slice';
 
 const style = {
   position: 'absolute',
@@ -20,6 +21,7 @@ const style = {
 };
 
 export default function ResponseModal({ open, type }) {
+  const examStatus = useSelector(state => state.exam.status);
   const status = useSelector(state => state.course.status);
   const newsStatus = useSelector(state => state.news.status);
   const notificationStatus = useSelector(state => state.notification.status);
@@ -32,10 +34,14 @@ export default function ResponseModal({ open, type }) {
     }
     if (type == 'course') {
       dispatch(setStatus(''));
-      navigate('/admin/course');
+      // navigate('/admin/course');
     }
     if (type == 'notification') {
       dispatch(setNotificationStatus(''));
+      // navigate('/admin/notification');
+    }
+    if (type == 'exam') {
+      dispatch(setExamStatus(''));
       // navigate('/admin/notification');
     }
 
@@ -55,6 +61,7 @@ export default function ResponseModal({ open, type }) {
             {type == 'news' && newsStatus}
             {type == 'course' && status}
             {type == 'notification' && notificationStatus}
+            {type == 'exam' && examStatus}
           </Typography>
           {/* <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             Duis mollis, est non commodo luctus, nisi erat porttitor ligula.

@@ -10,7 +10,6 @@ import PageNotFound from './app/components/PageNotFound';
 import { routes } from './utils/routes';
 import SignIn from './app/components/Login';
 import { GlobalStyle } from './styles/GlobalStyle';
-import SideBar from './app/components/SideBar';
 // import localStorage from 'localStorage';
 
 const ProtectedRoute = props => {
@@ -31,30 +30,30 @@ function App() {
           <Route element={<SignIn />} path="/login" />
         </Routes>
         {storedAuthToken && (
-          <div style={{ display: 'flex' }}>
-            <SideBar />
-            <Dashboard>
-              <Routes>
-                {routes.map(route => (
-                  <React.Fragment key={uuid()}>
-                    {route.isProtected ? (
-                      <Route
-                        element={
-                          <ProtectedRoute allowedRole={route.allowedRole}>
-                            {route.element}
-                          </ProtectedRoute>
-                        }
-                        path={route.path}
-                      />
-                    ) : (
-                      <Route element={route.element} path={route.path} />
-                    )}
-                  </React.Fragment>
-                ))}
-                <Route element={<PageNotFound />} path="*" />
-              </Routes>
-            </Dashboard>
-          </div>
+          // <div style={{ display: 'flex' }}>
+          // <SideBar />
+          <Dashboard>
+            <Routes>
+              {routes.map(route => (
+                <React.Fragment key={uuid()}>
+                  {route.isProtected ? (
+                    <Route
+                      element={
+                        <ProtectedRoute allowedRole={route.allowedRole}>
+                          {route.element}
+                        </ProtectedRoute>
+                      }
+                      path={route.path}
+                    />
+                  ) : (
+                    <Route element={route.element} path={route.path} />
+                  )}
+                </React.Fragment>
+              ))}
+              <Route element={<PageNotFound />} path="*" />
+            </Routes>
+          </Dashboard>
+          // </div>
         )}
       </React.Fragment>
     </>

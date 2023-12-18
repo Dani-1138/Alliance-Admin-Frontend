@@ -73,6 +73,7 @@ function* updateExamSaga(action) {
 }
 
 function* setExam(action) {
+  console.log(action.payload);
   try {
     const post = yield call(() =>
       axios.post(`${apiBaseUrl}/question/create`, action.payload),
@@ -84,10 +85,10 @@ function* setExam(action) {
 }
 
 function* examSaga() {
+  yield takeLatest('exam/setExamStart', setExam);
   yield takeLatest('exam/getExamStart', getExamSaga);
   yield takeLatest('exam/deleteExamStart', deleteExamSaga);
   yield takeLatest('exam/updateExamStart', updateExamSaga);
-  yield takeLatest('exam/setExamStart', setExam);
 }
 
 export default examSaga;
