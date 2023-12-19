@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   exams: [],
   examStatus: '',
+  deletedId: '',
   loading: false,
   error: null,
 };
@@ -12,14 +13,13 @@ const examSlice = createSlice({
   initialState,
   reducers: {
     setExamStart: (state, action) => {
-      console.log('start');
       state.exams = action.payload;
+      state.loading = true;
     },
     setExamSuccess: (state, action) => {
-      console.log('sucesss');
       state.loading = false;
       state.exams = action.payload;
-      state.examStatus = action.payload.data.msg;
+      state.examStatus = action.payload.msg;
     },
     setExamFailure: (state, action) => {
       state.loading = false;
@@ -64,7 +64,14 @@ const examSlice = createSlice({
       state.error = action.payload;
     },
     setExamStatus: (state, action) => {
-      state.status = action.payload;
+      state.examStatus = action.payload;
+    },
+    setDeletedId: (state, action) => {
+      state.deletedId = action.payload.id;
+      console.log(state.deletedId);
+    },
+    clearDeletedId: state => {
+      state.deletedId = '';
     },
   },
 });
@@ -83,6 +90,8 @@ export const {
   updateExamSuccess,
   updateExamFailure,
   setExamStatus,
+  setDeletedId,
+  clearDeletedId,
 } = examSlice.actions;
 
 export default examSlice.reducer;

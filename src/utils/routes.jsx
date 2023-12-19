@@ -68,7 +68,7 @@ export const routes = [
   {
     element: <AdminExamPage />,
     exact: true,
-    path: '/admin/exam',
+    path: '/admin/exam/:id',
     isProtected: true,
     allowedRole: 'admin',
   },

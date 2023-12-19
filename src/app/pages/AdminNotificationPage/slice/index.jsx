@@ -18,7 +18,7 @@ const notificationSlice = createSlice({
     setNotificationSuccess: (state, action) => {
       state.loading = false;
       state.notifications = action.payload;
-      state.status = action.payload.data.msg;
+      state.status = action.payload.data.message;
     },
     setNotificationFailure: (state, action) => {
       state.loading = false;

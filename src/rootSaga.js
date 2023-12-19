@@ -9,8 +9,8 @@ import notificationSaga from './app/pages/AdminNotificationPage/slice/saga';
 
 export function* rootSaga() {
   yield all([
-    courseSaga(),
     examSaga(),
+    courseSaga(),
     answerSaga(),
     ExamDetailSaga(),
     newsSaga(),

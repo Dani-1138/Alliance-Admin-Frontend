@@ -47,6 +47,7 @@ const AllCourse = ({ button, data }) => {
             open={open}
             handleOpen={handleOpen}
             handleClose={handleClose}
+            type="course"
           />
         )}
         <ArrowForwardIosIcon

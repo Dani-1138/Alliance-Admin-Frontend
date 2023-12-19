@@ -13,6 +13,7 @@ import {
 } from './index';
 import axios from 'axios';
 import { apiBaseUrl } from '../../../../utils/constants';
+import { setExamFailure, setExamSuccess } from '../slice';
 
 // API functions for fetching, deleting, and updating courses
 
@@ -94,8 +95,20 @@ function* setAnswer(action) {
     yield put(setAnswerFailure(error));
   }
 }
+function* setExamSaga(action) {
+  console.log(action.payload);
+  try {
+    const post = yield call(() =>
+      axios.post(`${apiBaseUrl}/question/create`, action.payload),
+    );
+    yield put(setExamSuccess(post));
+  } catch (error) {
+    yield put(setExamFailure(error));
+  }
+}
 
 function* answerSaga() {
+  yield takeLatest('exam/setExamStart', setExamSaga);
   yield takeLatest('answer/getAnswerStart', getAnswerSaga);
   yield takeLatest('answer/deleteAnswerStart', deleteAnswerSaga);
   yield takeLatest('answer/updateAnswerStart', updateAnswerSaga);

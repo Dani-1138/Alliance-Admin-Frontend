@@ -1,16 +1,17 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { setExamStart } from '../pages/AdminExamPage/slice';
+import { setExamStart, setExamStatus } from '../pages/AdminExamPage/slice';
 import BasicSelect from '../ui/Select';
 import { getExamDetailStart } from '../pages/AdminExamDetailPage/slice';
 import ResponseModal from '../ui/ResponseModal';
+import axios from 'axios';
 // import { setAnswerStart } from '../pages/AdminExamPage/answerSlice';
 // import axios from 'axios';
 
 const ExamForm = () => {
-  const examStatus = useSelector(state => state.exam.status);
+  const examStatus = useSelector(state => state.exam.examStatus);
   const exams = [1, 2, 2, 3];
   const [questionData, setQuestionData] = useState({
     question: '',
@@ -28,7 +29,7 @@ const ExamForm = () => {
   const [title, setTitle] = useState('');
   const dispatch = useDispatch();
   const queryParams = new URLSearchParams(location.search);
-
+  const { id } = useParams();
   const titlee = queryParams.get('title');
 
   const handleChange = event => {
@@ -66,10 +67,19 @@ const ExamForm = () => {
       explanation: questionData.explanation,
       question: questionData.question,
       video_url: questionData.videoUrl,
+      courseId: id,
       answer,
     };
-    const res = dispatch(setExamStart(question));
-    console.log(res);
+    dispatch(setExamStart({ question }));
+    axios
+      .post(`http://localhost:5000/api/question/create`, question)
+      .then(response => {
+        dispatch(setExamStatus(response.data.msg));
+      })
+      .catch(error => {
+        console.error(error);
+        // Handle errors here
+      });
     // dispatch(setAnswerStart(answer));
     // console.log(data);
   };
@@ -232,8 +242,8 @@ const ExamForm = () => {
               </div>
             </div>
           </div>
+          {examStatus && <ResponseModal type="exam" />}
         </div>
-        {examStatus && <ResponseModal type="exam" />}
       </div>
       {/* </div>
       </WrapperContainer> */}

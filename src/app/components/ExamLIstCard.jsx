@@ -3,8 +3,16 @@ import styled from 'styled-components';
 import Box from '@mui/material/Box';
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
+import { setDeletedId } from '../pages/AdminExamPage/slice';
+import { useDispatch } from 'react-redux';
 
-const ExamListCard = ({ examList, index, examId }) => {
+const ExamListCard = ({ examList, index, examId, handleOpen }) => {
+  const dispatch = useDispatch();
+  const handleOpenDelete = id => {
+    console.log(id);
+    dispatch(setDeletedId({ id }));
+    handleOpen();
+  };
   return (
     <CardContainer className="shadow">
       {/* <PhotoContainer imageUrl={examList.image_url} /> */}
@@ -14,7 +22,7 @@ const ExamListCard = ({ examList, index, examId }) => {
         </H5>
         <h6>
           <span style={{ color: 'black' }}>exp:</span>{' '}
-          {examList.explanation.substring(0, 100)}...
+          {examList.explanation?.substring(0, 100)}...
         </h6>
         <Box
           sx={{
@@ -40,6 +48,14 @@ const ExamListCard = ({ examList, index, examId }) => {
         {/* </Link> */}
       </CardContent>
       <div style={{ width: '100%', display: 'flex', justifyContent: 'end' }}>
+        <button
+          type="button"
+          className="btn btn-danger"
+          // onClick={handleCourseDelete(data.id)}
+          onClick={() => handleOpenDelete(examList?.id)}
+        >
+          Delete
+        </button>
         <Link
           to={{
             pathname: '/admin/quiz',

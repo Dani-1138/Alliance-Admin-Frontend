@@ -10,6 +10,7 @@ import {
   setDeletedId,
 } from '../pages/AdminCoursePage/slice';
 import { deleteNewsStart } from '../pages/AdminNewsPage/slice';
+import { deleteExamStart } from '../pages/AdminExamPage/slice';
 
 const style = {
   position: 'absolute',
@@ -26,14 +27,22 @@ const style = {
 export default function BasicModal({ open, handleClose, type }) {
   const id = useSelector(state => state.course.deletedId);
   const newsId = useSelector(state => state.news.deletedId);
+  const examId = useSelector(state => state.exam.deletedId);
+
   const dispatch = useDispatch();
   const handleCourseDelete = () => {
     if (type == 'news') {
       dispatch(deleteNewsStart({ id: newsId }));
       handleClose();
-    } else {
+    }
+    if (type == 'course') {
       console.log(id);
       dispatch(deleteCourseStart({ id }));
+      handleClose();
+    }
+
+    if (type == 'exam') {
+      dispatch(deleteExamStart({ id: examId }));
       handleClose();
     }
   };

@@ -21,7 +21,7 @@ const style = {
 };
 
 export default function ResponseModal({ open, type }) {
-  const examStatus = useSelector(state => state.exam.status);
+  const examStatus = useSelector(state => state.exam.examStatus);
   const status = useSelector(state => state.course.status);
   const newsStatus = useSelector(state => state.news.status);
   const notificationStatus = useSelector(state => state.notification.status);

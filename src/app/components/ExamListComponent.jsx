@@ -1,18 +1,23 @@
 /* eslint-disable react/prop-types */
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getExamStart } from '../pages/AdminExamPage/slice';
 import ExamListCard from './ExamLIstCard';
 import { PrimaryButton } from '../ui/Button';
+import BasicModal from '../ui/Modal';
 
 // import AllCourse from './AllCourse';
 const ExamListComponent = () => {
   const examList = useSelector(state => state.exam.exams);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+
   const { id } = useParams();
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     dispatch(getExamStart({ id }));
@@ -58,7 +63,7 @@ const ExamListComponent = () => {
         <div>
           <PrimaryButton
             marginRight={'25px'}
-            onClick={() => navigate('/admin/exam')}
+            onClick={() => navigate(`/admin/exam/${id}`)}
           >
             Add new Question
           </PrimaryButton>
@@ -66,9 +71,23 @@ const ExamListComponent = () => {
       </div>
       <div className="row" style={{ width: '100%' }}>
         {examList.map((exam, i) => (
-          <ExamListCard examList={exam} index={i} key={i} examId={id} />
+          <ExamListCard
+            examList={exam}
+            index={i}
+            key={i}
+            examId={id}
+            handleOpen={handleOpen}
+          />
         ))}
       </div>
+      {open && (
+        <BasicModal
+          open={open}
+          handleOpen={handleOpen}
+          handleClose={handleClose}
+          type="exam"
+        />
+      )}
       {/* <AllCourse button={true} data={data} />
       <AllCourse button={false} />
       <AllCourse button={false} /> */}

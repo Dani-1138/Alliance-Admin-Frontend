@@ -19,7 +19,7 @@ const fetchExam = async id => {
 };
 
 const deleteExam = async id => {
-  const response = await fetch(`${apiBaseUrl}/question/${id}`, {
+  const response = await fetch(`${apiBaseUrl}/question/delete/${id}`, {
     method: 'DELETE',
   });
   return response.json();
@@ -53,7 +53,7 @@ function* getExamSaga(action) {
 function* deleteExamSaga(action) {
   try {
     const { id } = action.payload;
-    yield put(deleteExamStart());
+    // yield put(deleteExamStart());
     yield call(deleteExam, id);
     yield put(deleteExamSuccess(id));
   } catch (error) {
@@ -72,20 +72,7 @@ function* updateExamSaga(action) {
   }
 }
 
-function* setExam(action) {
-  console.log(action.payload);
-  try {
-    const post = yield call(() =>
-      axios.post(`${apiBaseUrl}/question/create`, action.payload),
-    );
-    yield put(setExamSuccess(post));
-  } catch (error) {
-    yield put(setExamFailure(error));
-  }
-}
-
 function* examSaga() {
-  yield takeLatest('exam/setExamStart', setExam);
   yield takeLatest('exam/getExamStart', getExamSaga);
   yield takeLatest('exam/deleteExamStart', deleteExamSaga);
   yield takeLatest('exam/updateExamStart', updateExamSaga);
