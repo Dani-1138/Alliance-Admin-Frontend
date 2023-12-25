@@ -72,7 +72,7 @@ const ExamForm = () => {
     };
     dispatch(setExamStart({ question }));
     axios
-      .post(`http://localhost:5000/api/question/create`, question)
+      .post(`http://localhost:8080/api/questions`, question)
       .then(response => {
         dispatch(setExamStatus(response.data.msg));
       })
